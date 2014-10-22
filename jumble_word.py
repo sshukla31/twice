@@ -73,17 +73,23 @@ def search_file(word):
 
     return False
 
+
+def run(query):
+    """ Return result for jumbled words """
+    combs = []
+    result = []
+    for k in range(2, len(query) + 1):
+        for word in combination(k, list(query), []):
+            for element in permutation(word=word, result=[]):
+                if search_file("".join(element)):
+                    result.append("".join(element))
+
+    return sorted(result)
+
+
 if __name__ == '__main__':
     query = raw_input("Input word : ").strip()
     if len(query) == 0:
         print "Please enter some value"
     else:
-        combs = []
-        result = []
-        for k in range(2, len(query) + 1):
-            for word in combination(k, list(query), []):
-                for element in permutation(word=word, result=[]):
-                    if search_file("".join(element)):
-                        result.append("".join(element))
-
-    print sorted(result)
+        print run(query)
