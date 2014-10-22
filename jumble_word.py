@@ -81,7 +81,7 @@ def run(query):
     for k in range(2, len(query) + 1):
         for word in combination(k, list(query), []):
             for element in permutation(word=word, result=[]):
-                if search_file("".join(element)):
+                if "".join(element) not in result and search_file("".join(element)):
                     result.append("".join(element))
 
     return sorted(result)
